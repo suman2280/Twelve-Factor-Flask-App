@@ -32,7 +32,12 @@ jobs:
       # Step 5: Run tests inside Docker container (optional)
       - name: Run tests
         run: |
-          docker run --rm suman2280/my-flask-app:latest python -m unittest discover -s tests
+          docker run --rm \
+            -v $PWD:/app \
+            -w /app \
+            my-dockerhub-username/my-flask-app:latest \
+            python -m unittest discover -s tests
+
 
       # Step 6: Push Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
